@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install -g surge
+      - run: surge ./ gainful-burst.surge.sh --token 992a39bcd094b1d4d3059df8317e6c97
 
-    - name: Build and Deploy
-      run: |
-        # Configurar Surge.sh
-        npm install --global surge
-        surge token 992a39bcd094b1d4d3059df8317e6c97 
 
-        # Desplegar en Surge.sh
-        surge --project ./ --domain gainful-burst.surge.sh
